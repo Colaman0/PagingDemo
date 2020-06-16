@@ -3,28 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <LinearLayout
+        <variable
+            name="itemview"
+            type="com.kyle.pagingdemo.paging.LoadmoreView" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:focusedByDefault="false"
-        android:gravity="center"
-        android:padding="16dp">
+        android:layout_height="50dp">
 
         <ProgressBar
             android:id="@+id/loading_progress"
             style="@style/Base.Widget.AppCompat.ProgressBar"
             android:layout_width="16dp"
-            android:layout_height="16dp" />
+            android:layout_height="16dp"
+            android:visibility="@{itemview.loading ?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_status"
+        <Button
+            android:id="@+id/btn_reload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="16sp"
-            tools:text="error" />
-    </LinearLayout>
+            android:onClick="@{()->itemview.retrycallback.invoke()}"
+            android:text="reload"
+            android:visibility="@{itemview.loading ?View.GONE:View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

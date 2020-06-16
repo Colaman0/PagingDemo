@@ -23,7 +23,6 @@ class MainSource : PagingSource<Int, ArticleEntity>() {
         return try {
             delay(2000)
             val response = Api.getHomeArticles(page)
-            Log.d("kyle", "thread = ${Thread.currentThread().name}")
             LoadResult.Page(
                 data = response.datas,
                 prevKey = if (page == 0) null else page - 1,
